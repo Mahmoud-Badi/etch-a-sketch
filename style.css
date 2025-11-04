@@ -15,7 +15,7 @@ h1 {
     font-size: 80px;
     color: white;
 }
-
+  
 .container {
     display: flex;
     flex-direction: row;
@@ -50,8 +50,4 @@ h1 {
     border: 1px solid #ddd;
     background-color: #f0f0f0;
     transition: background-color 0.1s ease;
-}
-
-.grid div:hover {
-    background-color: #424549;
 }
