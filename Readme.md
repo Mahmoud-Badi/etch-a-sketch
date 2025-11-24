@@ -2,6 +2,8 @@
 
 A simple drawing app built with vanilla JavaScript. Draw on a customizable grid, use different colors, or go wild with rainbow mode.
 
+[Live Demo](https://mahmoud-badi.github.io/etch-a-sketch/)
+
 ## Features
 
 - Adjustable grid size (1x1 to 64x64)
