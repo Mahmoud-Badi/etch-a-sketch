@@ -1,5 +1,5 @@
 window.onload = () => {
-    const defaultColor = '#f0f0f0';
+    const defaultColor = 'rgba(255, 255, 255, 0.9)';
     let currentColor = '#000000';
     let currentMode = 'draw';
     
@@ -7,6 +7,11 @@ window.onload = () => {
     colorPicker.addEventListener('input', (e) => {
         currentColor = e.target.value;
         currentMode = 'draw';
+    });
+    
+    const rainbowBtn = document.getElementById('rainbow-button');
+    rainbowBtn.addEventListener('click', () => {
+        currentMode = 'rainbow';
     });
     
     const eraserBtn = document.getElementById('eraser-button');
@@ -32,6 +37,13 @@ window.onload = () => {
         isDrawing = false;
     });
     
+    function getRandomColor() {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+    
     function createGrid(size) {
         const grid = document.querySelector('.grid');
         
@@ -44,6 +56,8 @@ window.onload = () => {
                 if (isDrawing) {
                     if (currentMode === 'erase') {
                         square.style.backgroundColor = defaultColor;
+                    } else if (currentMode === 'rainbow') {
+                        square.style.backgroundColor = getRandomColor();
                     } else {
                         square.style.backgroundColor = currentColor;
                     }
@@ -53,6 +67,8 @@ window.onload = () => {
             square.addEventListener('mousedown', () => {
                 if (currentMode === 'erase') {
                     square.style.backgroundColor = defaultColor;
+                } else if (currentMode === 'rainbow') {
+                    square.style.backgroundColor = getRandomColor();
                 } else {
                     square.style.backgroundColor = currentColor;
                 }
@@ -63,7 +79,17 @@ window.onload = () => {
     }
     
     const sizeSlider = document.getElementById('size-input');
-
+    const sizeDisplay = document.getElementById('size-display');
+    
+    function updateSizeDisplay(size) {
+        sizeDisplay.textContent = `${size} x ${size}`;
+    }
+    
+    sizeSlider.addEventListener('input', (e) => {
+        const newSize = e.target.value;
+        updateSizeDisplay(newSize);
+    });
+    
     sizeSlider.addEventListener('change', (e) => {
         const newSize = e.target.value;
         
@@ -73,5 +99,6 @@ window.onload = () => {
     });
 
     document.documentElement.style.setProperty('--grid-size', 16);
+    updateSizeDisplay(16);
     createGrid(16);
 };
